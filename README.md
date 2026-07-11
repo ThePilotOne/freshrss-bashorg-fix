@@ -1,33 +1,60 @@
-Bashorg BR Fix
-Fixes formatting issues in the Bash.org RSS feed when used with FreshRSS.
-What it fixes
-Some Bash.org RSS entries contain HTML that is escaped one level too much.
-For example:
-&amp;lt;nickname&amp;gt;
-&amp;lt;br&amp;gt;
-instead of
-&lt;nickname&gt;
-<br>
-This extension automatically fixes the content during feed import.
-Current fixes:
-converts
-&amp;lt;
-&amp;gt;
-to
-&lt;
-&gt;
-converts
-&lt;br&gt;
-into a real HTML <br> tag
-The original RSS feed is not modified. The content is corrected only before it is stored in FreshRSS.
+# Bashorg BR Fix
 
-Installation
+A lightweight extension for **FreshRSS** that fixes formatting issues in the Bash.org RSS feed during import.
 
-Copy the extension into
+## Features
+
+The extension automatically fixes common HTML escaping problems found in the Башорг.рф RSS feed:
+
+- Converts double-escaped HTML entities:
+  - `&amp;lt;nickname&amp;gt;` → `&lt;nickname&gt;`
+- Restores line breaks:
+  - `&lt;br&gt;` → `<br>`
+
+All modifications are applied **before the entry is stored in the FreshRSS database**.
+
+## Requirements
+
+- FreshRSS 1.28+
+- PHP 8.1+
+
+## Installation
+
+Copy the extension into the FreshRSS extensions directory:
+
+```text
 FreshRSS/extensions/xExtension-BashorgBrFix
-Enable it in FreshRSS and refresh the Bash.org feed.
-Compatibility
-FreshRSS 1.28+
-PHP 8+
-License
-MIT
+```
+
+Enable the extension from:
+
+```
+Settings → Extensions
+```
+
+Refresh the Bash.org feed.
+
+## How it works
+
+The extension hooks into FreshRSS using the `entry_before_insert` hook and modifies the raw entry content before it is saved.
+
+It only processes the Bash.org feed and leaves all other feeds untouched.
+
+## Before
+
+```
+&amp;lt;xxx&amp;gt;
+Hello.&lt;br&gt;Second line.
+```
+
+## After
+
+```
+<xxx>
+Hello.
+Second line.
+```
+
+## License
+
+MIT License
