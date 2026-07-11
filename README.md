@@ -1,10 +1,10 @@
-# Bashorg BR Fix
+# Bashorg Fix
 
 A lightweight extension for **FreshRSS** that fixes formatting issues in the Bash.org RSS feed during import.
 
 ## Features
 
-The extension automatically fixes common HTML escaping problems found in the Башорг.рф RSS feed:
+The extension automatically fixes common HTML escaping problems found in the башорг.рф RSS feed:
 
 - Converts double-escaped HTML entities:
   - `&amp;lt;nickname&amp;gt;` → `&lt;nickname&gt;`
